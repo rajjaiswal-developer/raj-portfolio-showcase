@@ -20,15 +20,6 @@ const seedAdmin = async () => {
         console.log("✅ Admin seeded");
       }
     }
-    // const adminExists = await User.findOne({ role: 'admin' });
-    // if (!adminExists) {
-    //   await User.create({
-    //     email: process.env.ADMIN_EMAIL || 'admin@rajjaiswal.dev',
-    //     password: process.env.ADMIN_PASSWORD || 'Admin@1234',
-    //     role: 'admin'
-    //   });
-    //   console.log('✅ Admin seeded');
-    // }
 
     // ── PROJECTS (from real GitHub repos) ───────────────────
     const projectCount = await Project.countDocuments();
