@@ -1,0 +1,320 @@
+# 🖥️ STEP-BY-STEP LOCAL SETUP GUIDE
+# Raj Jaiswal Portfolio — Run on Your Laptop
+# =============================================
+# You have: Node.js installed + MongoDB Atlas account
+# Goal: See your website running on your laptop
+# =============================================
+
+
+════════════════════════════════════════════════════════════════
+STEP 1 — EXTRACT THE ZIP FILE
+════════════════════════════════════════════════════════════════
+
+1. Find the downloaded file: raj-portfolio-complete.zip
+2. Right-click on it → "Extract All" (Windows) or double-click (Mac)
+3. Choose a location — recommend: C:\Projects\ on Windows
+   or /Users/yourname/Projects/ on Mac
+4. After extraction you will see a folder: raj-portfolio
+5. Inside that folder you should see:
+   📁 backend
+   📁 frontend
+   📁 admin
+   📄 README.md
+   📄 package.json
+
+
+════════════════════════════════════════════════════════════════
+STEP 2 — GET YOUR MONGODB CONNECTION STRING
+════════════════════════════════════════════════════════════════
+
+You already have a MongoDB Atlas account. Follow these steps:
+
+2a. Go to https://cloud.mongodb.com and LOG IN
+
+2b. On the left sidebar, click "Database" under DEPLOYMENT
+
+2c. You will see a cluster (probably named "Cluster0")
+    → Click the green "Connect" button next to it
+
+2d. A popup opens. Click "Drivers"
+
+2e. Select:
+    - Driver: Node.js
+    - Version: 5.5 or later
+
+2f. You will see a connection string like this:
+    mongodb+srv://yourname:<password>@cluster0.xxxxx.mongodb.net/
+
+2g. COPY that full string somewhere (Notepad)
+
+2h. Replace <password> with your actual MongoDB Atlas password
+    Example:
+    mongodb+srv://raj:mypassword123@cluster0.abc123.mongodb.net/raj-portfolio
+
+    ⚠️ Add "raj-portfolio" at the end (this creates your database)
+
+2i. IMPORTANT — Allow access from anywhere:
+    → Left sidebar → "Network Access"
+    → Click "Add IP Address"
+    → Click "Allow Access from Anywhere" (adds 0.0.0.0/0)
+    → Click Confirm
+    → Wait 1-2 minutes for it to activate
+
+
+════════════════════════════════════════════════════════════════
+STEP 3 — SET UP THE BACKEND
+════════════════════════════════════════════════════════════════
+
+3a. Open VS Code (or any code editor)
+    → File → Open Folder → select the "raj-portfolio" folder
+
+3b. Open the TERMINAL in VS Code:
+    → Menu bar → Terminal → New Terminal
+    (A black panel opens at the bottom)
+
+3c. Navigate to the backend folder. Type this and press Enter:
+    cd backend
+
+3d. Install all backend packages. Type this and press Enter:
+    npm install
+    ⏳ Wait 1-2 minutes. You'll see lots of text scrolling.
+    ✅ Done when you see: "added XXX packages"
+
+3e. Create the environment file:
+    → In VS Code file tree, go inside the "backend" folder
+    → You will see a file called ".env.example"
+    → RIGHT-CLICK on it → Copy
+    → RIGHT-CLICK on the "backend" folder → Paste
+    → Rename the pasted file from ".env.example" to ".env"
+      (just remove the word "example" and the dot before it)
+
+    ⚠️ The file must be named exactly:  .env
+    ⚠️ No ".example" at the end
+
+3f. Open the .env file and fill in your details.
+    Replace EVERYTHING between the = and end of line:
+
+    ┌─────────────────────────────────────────────┐
+    │  PORT=5000                                   │
+    │  NODE_ENV=development                         │
+    │                                              │
+    │  MONGO_URI=paste_your_mongodb_string_here    │
+    │                                              │
+    │  JWT_SECRET=rajjaiswal_super_secret_key_2024 │
+    │  JWT_EXPIRE=30d                              │
+    │                                              │
+    │  ADMIN_EMAIL=admin@rajjaiswal.dev            │
+    │  ADMIN_PASSWORD=Admin@1234                   │
+    │                                              │
+    │  RAZORPAY_KEY_ID=dummy_key_for_now           │
+    │  RAZORPAY_KEY_SECRET=dummy_secret_for_now    │
+    │                                              │
+    │  CLOUDINARY_CLOUD_NAME=dummy_for_now         │
+    │  CLOUDINARY_API_KEY=dummy_for_now            │
+    │  CLOUDINARY_API_SECRET=dummy_for_now         │
+    │                                              │
+    │  FRONTEND_URL=http://localhost:3000          │
+    │  ADMIN_URL=http://localhost:3001             │
+    └─────────────────────────────────────────────┘
+
+    ✅ For now, only MONGO_URI needs to be real.
+    ✅ Razorpay and Cloudinary can stay as "dummy" to just see the site.
+    ✅ Save the file: Ctrl+S (Windows) or Cmd+S (Mac)
+
+3g. Start the backend server. In the terminal, type:
+    npm run dev
+
+    ✅ You should see:
+       🚀 Server running on port 5000
+       ✅ MongoDB Connected
+       ✅ Admin seeded
+       ✅ Projects seeded
+       ✅ Products seeded
+
+    ❌ If you see an error — go to TROUBLESHOOTING at bottom of this file
+
+
+════════════════════════════════════════════════════════════════
+STEP 4 — SET UP THE FRONTEND (Portfolio Website)
+════════════════════════════════════════════════════════════════
+
+4a. Open a NEW terminal in VS Code:
+    → Click the "+" icon next to the terminal panel
+    (Do NOT close the backend terminal — keep it running!)
+
+4b. Go to the frontend folder:
+    cd frontend
+
+4c. Install frontend packages:
+    npm install
+    ⏳ Wait 2-3 minutes
+
+4d. Create the .env file for frontend:
+    → Inside the "frontend" folder, create a new file
+    → Name it exactly:  .env
+    → Add this single line inside:
+       REACT_APP_API_URL=http://localhost:5000/api
+    → Save the file
+
+4e. Start the frontend:
+    npm start
+
+    ✅ A browser will automatically open: http://localhost:3000
+    ✅ You should see your portfolio website!
+
+    ⏳ First time takes 30-60 seconds to compile
+
+
+════════════════════════════════════════════════════════════════
+STEP 5 — SET UP THE ADMIN DASHBOARD
+════════════════════════════════════════════════════════════════
+
+5a. Open a THIRD terminal in VS Code (click "+" again)
+
+5b. Go to the admin folder:
+    cd admin
+
+5c. Install admin packages:
+    npm install
+    ⏳ Wait 1-2 minutes
+
+5d. Create the .env file for admin:
+    → Inside the "admin" folder, create a new file
+    → Name it exactly:  .env
+    → Add this single line:
+       REACT_APP_API_URL=http://localhost:5000/api
+    → Save the file
+
+5e. Start the admin dashboard:
+    npm start
+
+    ✅ Browser opens: http://localhost:3001
+    ✅ You should see the Admin Login page
+
+5f. Login with:
+    Email:    admin@rajjaiswal.dev
+    Password: Admin@1234
+
+
+════════════════════════════════════════════════════════════════
+STEP 6 — VERIFY EVERYTHING IS WORKING
+════════════════════════════════════════════════════════════════
+
+Open these 3 URLs in your browser:
+
+  🌐 Portfolio:   http://localhost:3000
+     → You should see: Hero section with your name, typing animation
+     → Scroll down: About, Skills, Projects, Shop Preview, Experience, Contact
+
+  🛍️ Shop:        http://localhost:3000/shop
+     → You should see: 6 tech products listed with cards
+
+  🔧 Admin:       http://localhost:3001
+     → Login → Dashboard with stats
+     → Products → 6 products pre-loaded
+     → Projects → 6 projects pre-loaded
+
+  🔌 API Health:  http://localhost:5000/api/health
+     → Should show: {"status":"OK","message":"Raj Portfolio API is running"}
+
+
+════════════════════════════════════════════════════════════════
+STEP 7 — ADD YOUR RESUME PDF
+════════════════════════════════════════════════════════════════
+
+7a. Rename your CV file to exactly: Raj_Jaiswal_CV.pdf
+
+7b. Copy it into: raj-portfolio → frontend → public
+    (The "public" folder is inside the frontend folder)
+
+7c. The download button in your Hero section will now work automatically.
+    Test it at: http://localhost:3000
+
+
+════════════════════════════════════════════════════════════════
+STEP 8 — TEST THE SHOP CART (No payment needed yet)
+════════════════════════════════════════════════════════════════
+
+8a. Go to http://localhost:3000/shop
+8b. Click "Add to Cart" on any self-shipping product (like the IoT kit)
+8c. Click the cart icon in the top right → see your cart
+8d. Affiliate products (Amazon) will open Amazon directly ✅
+8e. Payment checkout needs Razorpay keys — we'll set that up during deployment
+
+
+════════════════════════════════════════════════════════════════
+SUMMARY — 3 TERMINALS YOU NEED OPEN
+════════════════════════════════════════════════════════════════
+
+Terminal 1 (backend folder):   npm run dev     → port 5000
+Terminal 2 (frontend folder):  npm start       → port 3000
+Terminal 3 (admin folder):     npm start       → port 3001
+
+⚠️ All 3 must be running at the same time!
+⚠️ If you close a terminal, that part stops working.
+
+
+════════════════════════════════════════════════════════════════
+TROUBLESHOOTING — COMMON ERRORS
+════════════════════════════════════════════════════════════════
+
+❌ ERROR: "MongooseServerSelectionError" or "connection refused"
+   FIX:
+   → Check your MONGO_URI in backend/.env is correct
+   → Make sure you replaced <password> with your actual password
+   → Go to MongoDB Atlas → Network Access → check 0.0.0.0/0 is there
+   → Try pinging: https://cloud.mongodb.com (must be accessible)
+
+❌ ERROR: "EADDRINUSE port 5000 already in use"
+   FIX (Windows):
+   → Open Task Manager → Details → find node.exe → End Task
+   FIX (Mac):
+   → In terminal type: lsof -ti:5000 | xargs kill -9
+
+❌ ERROR: "Cannot find module 'nodemon'"
+   FIX: In backend folder terminal, type:
+   → npm install -g nodemon
+   → Then run: npm run dev again
+
+❌ ERROR: Frontend shows "Network Error" or no projects load
+   FIX:
+   → Make sure backend is running (Terminal 1 should show port 5000)
+   → Check frontend/.env has: REACT_APP_API_URL=http://localhost:5000/api
+   → Restart frontend: Ctrl+C then npm start
+
+❌ ERROR: "Port 3001 already in use" for admin
+   FIX: In admin terminal type: set PORT=3002 && npm start (Windows)
+        Or: PORT=3002 npm start (Mac)
+
+❌ ERROR: npm install fails with permission error (Mac)
+   FIX: Type: sudo npm install
+        Enter your Mac password when asked
+
+❌ Admin login says "Invalid credentials"
+   FIX:
+   → Check backend/.env has ADMIN_EMAIL and ADMIN_PASSWORD
+   → Stop backend (Ctrl+C) and restart: npm run dev
+   → The seeder runs again on restart
+
+❌ Page is blank / white screen
+   FIX:
+   → Open browser → Right click → Inspect → Console tab
+   → Look for red error messages
+   → Most common fix: make sure backend is running first
+
+
+════════════════════════════════════════════════════════════════
+WHAT'S NEXT — AFTER YOU VERIFY LOCALLY
+════════════════════════════════════════════════════════════════
+
+Once you're happy with how it looks locally, we'll:
+
+1. Set up Razorpay (get real test keys — free, 10 minutes)
+2. Set up Cloudinary (for product image uploads — free)
+3. Deploy backend to Render.com (free hosting)
+4. Deploy frontend to Vercel (free hosting)
+5. Deploy admin to Vercel (free hosting, private URL)
+6. Connect everything with production URLs
+7. Your website goes LIVE on the internet! 🚀
+
+Tell me when you see the website running locally and we'll move to deployment!
