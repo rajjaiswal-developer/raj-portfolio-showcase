@@ -37,10 +37,9 @@ export function Experience() {
         "Animation",
       ],
       points: [
-        "Developed 2D and 3D games using the Unity Engine.",
-        "Worked on player controls, weapons, NPC behavior, animations, and physics using C#.",
-        "Managed gameplay logic, scene flow, and debugging.",
-        "Used AI-assisted tools to speed up development and improve code quality.",
+        "Built 20+ gameplay systems (player controls, weapons, NPC behavior, physics) across 5+ 2D/3D Unity projects using C#.",
+        "Owned scene flow and debugging across the full project lifecycle.",
+        "Used AI-assisted tools (Copilot/Claude) to speed up development and improve code quality.",
       ],
     },
     {
@@ -58,22 +57,22 @@ export function Experience() {
         "Dashboards",
       ],
       points: [
-        "Analyzed real-world datasets using Python, SQL, Excel, and Power BI.",
-        "Cleaned data and created dashboards for actionable business insights.",
-        "Completed daily tasks under tight deadlines, improving analytical skills.",
+        "Cleaned and analyzed 10+ real-world datasets using Python, SQL, and Power BI.",
+        "Built 4+ interactive Power BI dashboards surfacing key trends and patterns across the cleaned datasets.",
+        "Delivered all assigned analyses within a 1-week deadline.",
       ],
     },
   ];
 
   const education = [
     {
-      degree: "B.Sc. Information Technology (TY – Pursuing)",
+      degree: "B.Sc. Information Technology (Grad. 2026)",
       institution: "Ramniranjan Jhunjhunwala College, University of Mumbai",
       year: "2026",
-      result: "SGPA: 9.18",
+      result: "CGPA: 9.21",
     },
     {
-      degree: "HSC – Commerce",
+      degree: "HSC",
       institution: "Vidya Niketan Jr. College, Ghatkopar East",
       year: "2023",
       result: "74.50%",

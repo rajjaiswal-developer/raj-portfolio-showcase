@@ -9,7 +9,12 @@ import {
   Mail,
 } from "lucide-react";
 
-const ROLES = ["Software Developer", "Game Developer", "Web Developer"];
+const ROLES = [
+  "Full-Stack Web Developer",
+  "MERN Stack Developer",
+  "Software Engineer",
+  "Game Developer",
+];
 
 const TECH_ICONS = [
   {
@@ -259,9 +264,10 @@ export default function Hero() {
               variants={item}
               className="text-text-dim text-lg md:text-xl leading-relaxed max-w-xl mb-10"
             >
-              BSc IT student at RJ College with hands-on internship experience
-              in Unity game development, web development & data analysis.
-              Skilled in Java, C#, C++, Python & JavaScript.
+              BSc IT student (9.21 CGPA) who builds production-grade full-stack
+              apps — React, Next.js & Node.js — including a live e-commerce
+              platform with secure auth and payments. Also experienced in Unity
+              game development.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-4 mb-12">
